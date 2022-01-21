@@ -1,7 +1,7 @@
 {
   "name": "dotburo/website",
   "description": "dotburo's main website (based on Pico 1.0)",
-  "version": "5.3.1",
+  "version": "5.4.0",
   "homepage": "https://dotburo.org/",
   "license": "GPL-3.0-or-later",
   "type": "project",
