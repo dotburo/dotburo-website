@@ -9,3 +9,4 @@ Disallow: /browser/*
 Disallow: /leontine/*
 Disallow: /storage/cache/*
 Disallow: /storage/portfolio/*
+Disallow: /storage/logs/*

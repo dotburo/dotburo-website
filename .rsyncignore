@@ -1,9 +1,0 @@
-.DS_Store
-.idea
-.env
-.swp
-vendor
-node_modules
-storage/cache/*
-config.php
-config-deploy.js

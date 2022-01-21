@@ -1,6 +1,5 @@
 module.exports = function(grunt) {
-    var path = require('path'),
-        config = require('./config.json');
+    var path = require('path');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -43,17 +42,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        exec: {
-            deploy: {
-                command: "rsync -zrphP --exclude-from '.rsyncignore' ./dist/* " + config.deploy.path
-            },
-            deploy_content: {
-                command: "rsync -zrphP --exclude-from '.rsyncignore' ./storage/content/* " + config.deploy.content_path
-            },
-            flush_cache : {
-                command: 'rsync -ahP --delete storage/cache/templates/ ' + config.cache
-            }
-        },
         watch: {
             scripts: {
                 cwd: 'resources',
@@ -62,7 +50,7 @@ module.exports = function(grunt) {
             }
         }
     });
-    grunt.loadNpmTasks('grunt-exec');
+
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
@@ -71,11 +59,6 @@ module.exports = function(grunt) {
     grunt.registerTask('min:html', ['htmlmin']);
     grunt.registerTask('concat:css', ['cssmin:concat']);
     grunt.registerTask('concat:js', ['requirejs:concat']);
-
-    grunt.registerTask('flush', ['exec:flush_cache']);
-    grunt.registerTask('deploy:assets', ['exec:deploy']);
-    grunt.registerTask('deploy:content', ['exec:deploy_content']);
-    grunt.registerTask('deploy', ['exec:deploy_content', 'exec:deploy', 'exec:flush_cache']);
 
     grunt.registerTask('default', ['min:html','concat:css','concat:js']);
 };

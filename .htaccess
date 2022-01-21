@@ -28,6 +28,11 @@ FileETag None
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # all to .org
+    RewriteCond %{HTTP_HOST} ^dotburo.com$ [OR]
+    RewriteCond %{HTTP_HOST} ^www.dotburo.com$
+    RewriteRule ^(.*)$ https://dotburo.org/$1 [R=301,L]
+
     # Cache bust js|css
     RewriteCond %{REQUEST_FILENAME} \d+(\.js|\.css)$
     RewriteRule ^(.+)\.(\d+)\.(js|css)$ $1.$3 [NC,L]

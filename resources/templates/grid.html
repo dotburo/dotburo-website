@@ -19,7 +19,7 @@
     </ul>
 </section><!--
 
---><div id="online" class="col content {{ active_category == 'online' ? 'open' : 'invisible' }}" tabindex="0">
+--><div id="online" class="col content {{ active_category == 'online' ? ' open' : ' invisible' }}" tabindex="0">
     {% if active_category == 'online' %}
         {% include 'templates/page.html' %}
     {% endif %}
@@ -46,7 +46,7 @@
     </ul>
 </section><!--
 
---><div id="offline" class="col content {{ active_category == 'offline' or active_category == 'blog' ? 'open' : 'invisible' }} {{ active_category == 'blog' ? 'as-blog' : '' }}" tabindex="0">
+--><div id="offline" class="col content {{ active_category == 'offline' or active_category == 'blog' ? ' open' : ' invisible' }} {{ active_category == 'blog' ? ' as-blog' : '' }}" tabindex="0">
     {% if active_category == 'offline' or active_category == 'blog' %}
         {% include 'templates/page.html' %}
     {% endif %}
