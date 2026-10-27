@@ -61,9 +61,7 @@ class Pico {
 		
 		// Get all the pages
 		$pages = $this->get_pages($settings['base_url'], $settings['pages_order_by'], $settings['pages_order'], $settings['excerpt_length']);
-		$prev_page = array();
-		$current_page = array();
-		$next_page = array();
+
 		while($current_page = current($pages)){
 			if((isset($meta['title'])) && ($meta['title'] == $current_page['title'])){
 				break;
@@ -77,9 +75,9 @@ class Pico {
 
 		// Load the theme
 		$this->run_hooks('before_twig_register');
-		$loader = new Twig_Loader_Filesystem(RESOURCES_DIR);
-		$twig = new Twig_Environment($loader, $settings['twig_config']);
-		$twig->addExtension(new Twig_Extension_Debug());
+		$loader = new \Twig\Loader\FilesystemLoader(RESOURCES_DIR);
+		$twig = new \Twig\Environment($loader, $settings['twig_config']);
+		$twig->addExtension(new \Twig\Extension\DebugExtension());
 		$twig_vars = array(
 			'config' => $settings,
 			'base_dir' => rtrim(ROOT_DIR, '/'),
@@ -162,7 +160,7 @@ class Pico {
 			}
 		}
 		
-		if(isset($headers['date'])) $headers['date_formatted'] = utf8_encode(strftime($config['date_format'], strtotime($headers['date'])));
+		if(!empty($headers['date'])) $headers['date_formatted'] = strtotime($headers['date']);
 
 		return $headers;
 	}
@@ -228,7 +226,7 @@ class Pico {
 				'url' => $url,
 				'author' => isset($page_meta['author']) ? $page_meta['author'] : '',
 				'date' => isset($page_meta['date']) ? $page_meta['date'] : '',
-				'date_formatted' => isset($page_meta['date']) ? utf8_encode(strftime($config['date_format'], strtotime($page_meta['date']))) : '',
+				'date_formatted' => isset($page_meta['date']) ? strtotime($page_meta['date']) : '',
 				//'content' => $page_content,
 				//this addition allows the 'description' meta to be picked up in content areas... specifically to replace 'excerpt'
 				'description' => isset($page_meta['description']) ? $page_meta['description'] : '',
